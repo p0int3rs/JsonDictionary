@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "bOLvRjwNrOU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Safa\\Documents\\GitHub\\JsonDictionary\\JsonDictionary\\JsonDictionary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Safa\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
