@@ -1,0 +1,46 @@
+﻿<Window x:Class="JsonDictionary.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JsonDictionary"
+        mc:Ignorable="d"
+        Title="JsonDictionary" Height="800" Width="600" Background="#FF1E1E26"
+        ResizeMode="NoResize">
+    <Canvas>
+        <Grid Canvas.Left="25" Canvas.Top="47" HorizontalAlignment="Left" VerticalAlignment="Center" Width="439">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="DosyaYolu" 
+             IsReadOnly="True" 
+             Background="#1E1E26" 
+             Foreground="#707080" 
+             Padding="8" 
+             BorderThickness="1"
+             BorderBrush="#333333"
+             VerticalContentAlignment="Center" Grid.ColumnSpan="2" Text="Json Dosyasını Seçin..."/>
+
+            <Button x:Name="DosyaButon" Grid.Column="1" 
+            Content="Dosya Seç" 
+            Click="BtnFileSelect_Click" 
+            Padding="15,5" 
+            Margin="107,0,-101,0" 
+            Background="#00D1FF" 
+            Foreground="#1E1E26" 
+            FontWeight="Bold"
+            Cursor="Hand"/>
+        </Grid>
+        <Label x:Name="Baslik" Content="Json Sözlük Uygulaması" Canvas.Left="169" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF00D1FF" FontFamily="Yu Gothic UI" FontSize="24" />
+        <TextBox x:Name="eng_textbox" Canvas.Left="25" TextWrapping="Wrap" Canvas.Top="146" Width="200" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <Label x:Name="eng_label" Content="English" Canvas.Left="84" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82" FontFamily="Yu Gothic UI Light" FontSize="20" Foreground="#FF00D1FF"/>
+        <TextBox x:Name="tr_textbox" Canvas.Left="364" TextWrapping="Wrap" Canvas.Top="146" Width="200" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label x:Name="tr_label" Content="Türkçe" Canvas.Left="424" Canvas.Top="109" Width="80" FontFamily="Yu Gothic UI Light" FontSize="20" Foreground="#FF00D1FF" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <ListBox x:Name="Listebox" Height="475" Width="539" d:ItemsSource="{d:SampleData ItemCount=5}" Canvas.Left="25" Canvas.Top="279" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="ekle_buton" Content="Ekle" Height="47" Canvas.Left="26" Canvas.Top="213" Width="140" FontFamily="Yu Gothic Medium" Background="#FF5EFD77" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ekle_buton_Click"/>
+        <Button x:Name="guncelle_buton" Content="Güncelle" Height="48" Canvas.Left="230" Canvas.Top="212" Width="140" FontFamily="Yu Gothic Medium" Background="#FFE4960B" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="guncelle_buton_Click" />
+        <Button x:Name="sil_buton" Content="Sil" Height="48" Canvas.Left="424" Canvas.Top="213" Width="140" FontFamily="Yu Gothic Medium" Background="#FFE4150B" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Click="sil_buton_Click"/>
+    </Canvas>
+</Window>
