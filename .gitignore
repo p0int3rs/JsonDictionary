@@ -1,0 +1,31 @@
+## Build results
+[Bb]in/
+[Oo]bj/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Rider / VSCode
+.idea/
+.vscode/
+
+## Logs
+*.log
+
+## OS junk
+.DS_Store
+Thumbs.db
+
+## NuGet
+*.nupkg
+# packages/   (klasik packages klasörü kullanmıyorsan gerek yok)
+
+## Test results
+TestResults/
+
+## Publish output
+publish/
