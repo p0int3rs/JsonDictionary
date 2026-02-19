@@ -59,6 +59,7 @@ namespace JsonDictionary
             {
                 Listebox.Items.Add($"{item.Key}  »  {item.Value}");
             }
+            count_label.Content = listeveriler.Count.ToString("D2");
             if (Listebox.Items.Count > 0)
             {
                 Listebox.ScrollIntoView(Listebox.Items[Listebox.Items.Count - 1]);
@@ -125,5 +126,7 @@ namespace JsonDictionary
             }
         }
     }
+
+    
 }
 // commit deneme

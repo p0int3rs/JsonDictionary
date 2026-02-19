@@ -36,6 +36,7 @@
         <Label x:Name="Baslik" Content="Json Sözlük Uygulaması" Canvas.Left="169" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF00D1FF" FontFamily="Yu Gothic UI" FontSize="24" />
         <TextBox x:Name="eng_textbox" Canvas.Left="25" TextWrapping="Wrap" Canvas.Top="146" Width="200" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" />
         <Label x:Name="eng_label" Content="English" Canvas.Left="84" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Width="82" FontFamily="Yu Gothic UI Light" FontSize="20" Foreground="#FF00D1FF"/>
+        <Label x:Name="count_label" Content="00" Canvas.Left="284" Canvas.Top="91" HorizontalAlignment="Left" VerticalAlignment="Top" Width="32" FontFamily="Yu Gothic UI Light" FontSize="20" Foreground="#FF00D1FF"/>
         <TextBox x:Name="tr_textbox" Canvas.Left="364" TextWrapping="Wrap" Canvas.Top="146" Width="200" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <Label x:Name="tr_label" Content="Türkçe" Canvas.Left="424" Canvas.Top="109" Width="80" FontFamily="Yu Gothic UI Light" FontSize="20" Foreground="#FF00D1FF" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <ListBox x:Name="Listebox" Height="475" Width="539" d:ItemsSource="{d:SampleData ItemCount=5}" Canvas.Left="25" Canvas.Top="279" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
