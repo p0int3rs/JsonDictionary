@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using JsonDictionary.Model;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
@@ -11,122 +12,173 @@ namespace JsonDictionary
 {
     public partial class MainWindow : Window
     {
-        private Dictionary<string, string> listeveriler = new Dictionary<string, string>();
+        private Dictionary<string, Word> listeveriler = new();
         private string secilenDosyaYolu = "";
 
         public MainWindow()
         {
             InitializeComponent();
         }
+
         private void jsonyukle()
         {
-                if (File.Exists(secilenDosyaYolu))
-                {
-                    string json = File.ReadAllText(secilenDosyaYolu);
-                    listeveriler = JsonConvert.DeserializeObject<Dictionary<string, string>>(json)
-                               ?? new Dictionary<string, string>();
-                    ListeyiGuncelle();
-                }
+            if (!File.Exists(secilenDosyaYolu))
+                return;
+
+            string json = File.ReadAllText(secilenDosyaYolu);
+
+            listeveriler = JsonConvert.DeserializeObject<Dictionary<string, Word>>(json)
+                           ?? new Dictionary<string, Word>();
+
+            ListeyiGuncelle();
         }
+
         private void BtnFileSelect_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog Dosyasecim = new OpenFileDialog
+            OpenFileDialog dosyaSecim = new OpenFileDialog
             {
                 Filter = "JSON Dosyaları (*.json)|*.json",
                 Title = "JSON Dosyasını Seç"
             };
 
-            if (Dosyasecim.ShowDialog() == true)
+            if (dosyaSecim.ShowDialog() == true)
             {
-                secilenDosyaYolu = Dosyasecim.FileName;
+                secilenDosyaYolu = dosyaSecim.FileName;
                 DosyaYolu.Text = secilenDosyaYolu;
                 jsonyukle();
             }
         }
+
         private void ListeKaydet()
         {
-                string json = JsonConvert.SerializeObject(listeveriler, Formatting.Indented);
-                File.WriteAllText(secilenDosyaYolu, json);
-            
-        }
+            if (string.IsNullOrEmpty(secilenDosyaYolu))
+            {
+                MessageBox.Show("Önce bir JSON dosyası seçmelisiniz.");
+                return;
+            }
 
+            string json = JsonConvert.SerializeObject(listeveriler, Formatting.Indented);
+            File.WriteAllText(secilenDosyaYolu, json);
+        }
 
         private void ListeyiGuncelle()
         {
-            Listebox.Items.Clear();
+            WordItemsControl.ItemsSource = null;
+            WordItemsControl.ItemsSource = listeveriler.ToList();
 
-            foreach (var item in listeveriler)
-            {
-                Listebox.Items.Add($"{item.Key}  »  {item.Value}");
-            }
-            count_label.Content = listeveriler.Count.ToString("D2");
-            if (Listebox.Items.Count > 0)
-            {
-                Listebox.ScrollIntoView(Listebox.Items[Listebox.Items.Count - 1]);
-            }
+            count_label.Text = $"{listeveriler.Count:D2} Kelime";
         }
+
         private void Temizle()
         {
             eng_textbox.Clear();
-            tr_textbox.Clear();
+            type_textbox.Clear();
+            meaning_textbox.Clear();
+            root_textbox.Clear();
+            root_type_textbox.Clear();
+            root_meaning_textbox.Clear();
             eng_textbox.Focus();
         }
 
         private void ekle_buton_Click(object sender, RoutedEventArgs e)
         {
-            string ing = eng_textbox.Text.Trim().ToLower();
-            string tr = tr_textbox.Text.Trim();
-
-            if (string.IsNullOrEmpty(ing) || string.IsNullOrEmpty(tr))
+            if (string.IsNullOrEmpty(secilenDosyaYolu))
             {
-                MessageBox.Show("Lütfen her iki alanı da doldurun!");
+                MessageBox.Show("Önce bir JSON dosyası seçmelisiniz.");
                 return;
             }
 
-            if (listeveriler.ContainsKey(ing))
+            string kelime = eng_textbox.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(kelime))
             {
-                MessageBox.Show("Bu kelime zaten mevcut. Güncelle butonunu kullanın.");
+                MessageBox.Show("Kelime boş olamaz.");
                 return;
             }
 
-            listeveriler.Add(ing, tr);
+            if (listeveriler.ContainsKey(kelime))
+            {
+                MessageBox.Show("Bu kelime zaten mevcut.");
+                return;
+            }
+
+            Word yeniKelime = new Word
+            {
+                Type = type_textbox.Text.Trim(),
+                Meaning = meaning_textbox.Text.Trim(),
+                Root = root_textbox.Text.Trim(),
+                RootType = root_type_textbox.Text.Trim(),
+                RootMeaning = root_meaning_textbox.Text.Trim()
+            };
+
+            listeveriler.Add(kelime, yeniKelime);
+
             ListeKaydet();
             ListeyiGuncelle();
             Temizle();
         }
+
         private void guncelle_buton_Click(object sender, RoutedEventArgs e)
         {
-            string ing = eng_textbox.Text.Trim().ToLower();
-            string tr = tr_textbox.Text.Trim();
+            string kelime = eng_textbox.Text.Trim().ToLower();
 
-            if (listeveriler.ContainsKey(ing))
-            {
-                listeveriler[ing] = tr;
-                ListeKaydet();
-                ListeyiGuncelle();
-                MessageBox.Show("Kelime güncellendi.");
-            }
-            else
+            if (!listeveriler.ContainsKey(kelime))
             {
                 MessageBox.Show("Güncellenecek kelime bulunamadı.");
+                return;
             }
-        }
-        private void sil_buton_Click(object sender, RoutedEventArgs e)
-        {
-            if (Listebox.SelectedItem == null) return;
 
-            string seciliSatir = Listebox.SelectedItem.ToString();
-            string anahtar = seciliSatir.Split('»')[0].Trim();
-
-            if (listeveriler.Remove(anahtar))
+            listeveriler[kelime] = new Word
             {
+                Type = type_textbox.Text.Trim(),
+                Meaning = meaning_textbox.Text.Trim(),
+                Root = root_textbox.Text.Trim(),
+                RootType = root_type_textbox.Text.Trim(),
+                RootMeaning = root_meaning_textbox.Text.Trim()
+            };
+
+            ListeKaydet();
+            ListeyiGuncelle();
+            MessageBox.Show("Kelime güncellendi.");
+        }
+
+        private void KartSil_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            string kelime = btn?.Tag?.ToString();
+
+            if (string.IsNullOrEmpty(kelime))
+                return;
+
+            if (MessageBox.Show($"{kelime} silinsin mi?",
+                "Onay",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                listeveriler.Remove(kelime);
                 ListeKaydet();
                 ListeyiGuncelle();
-                Temizle();
             }
         }
-    }
 
-    
+        private void KartGuncelle_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            string kelime = btn?.Tag?.ToString();
+
+            if (string.IsNullOrEmpty(kelime) || !listeveriler.ContainsKey(kelime))
+                return;
+
+            Word w = listeveriler[kelime];
+
+            eng_textbox.Text = kelime;
+            type_textbox.Text = w.Type;
+            meaning_textbox.Text = w.Meaning;
+            root_textbox.Text = w.Root;
+            root_type_textbox.Text = w.RootType;
+            root_meaning_textbox.Text = w.RootMeaning;
+
+            eng_textbox.Focus();
+        }
+    }
 }
-// commit deneme
