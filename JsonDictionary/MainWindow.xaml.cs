@@ -180,5 +180,18 @@ namespace JsonDictionary
 
             eng_textbox.Focus();
         }
+
+        private void OyunaBasla_Click(object sender, RoutedEventArgs e)
+        {
+            if (listeveriler == null || listeveriler.Count < 4)
+            {
+                MessageBox.Show("Oyunu başlatmak için en az 4 kelime olmalı!");
+                return;
+            }
+            GameWindow gameWindow = new GameWindow(listeveriler);
+            gameWindow.Owner = this;
+            gameWindow.Show();
+
+        }
     }
 }

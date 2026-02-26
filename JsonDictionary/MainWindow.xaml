@@ -73,6 +73,8 @@
             <!-- Butonlar -->
             <RowDefinition Height="*"/>
             <!-- Liste -->
+            <RowDefinition Height="Auto"/>
+            <!-- Oyun Butonu -->
         </Grid.RowDefinitions>
 
         <!-- BAŞLIK -->
@@ -269,6 +271,22 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
+        <!-- OYUNA BAŞLA -->
+        <Border Grid.Row="5"
+        Background="#14141A"
+        Padding="15"
+        CornerRadius="10"
+        Margin="0,20,0,0">
 
+            <Button Content="🎮 Oyuna Başla"
+            Height="45"
+            FontSize="16"
+            FontWeight="Bold"
+            Background="#00D1FF"
+            Foreground="#1E1E26"
+            Cursor="Hand"
+            BorderThickness="0"
+            Click="OyunaBasla_Click"/>
+        </Border>
     </Grid>
 </Window>
