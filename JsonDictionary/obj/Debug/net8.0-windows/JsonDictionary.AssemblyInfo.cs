@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JsonDictionary")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef41fc2d088ef2e49d8e55d6385f50946bbd661a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5be24775b67236a552b9a0d7ea968db7c32818b8")]
 [assembly: System.Reflection.AssemblyProductAttribute("JsonDictionary")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JsonDictionary")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
